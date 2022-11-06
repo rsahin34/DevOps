@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: first-deployment
+  namespace: rsahin
+spec:
+  selector:
+    matchLabels:
+      app: first-deployment
+  template:
+    metadata:
+      labels:
+        app: first-deployment
+    spec:
+      containers:
+      - name: first-deployment
+        image: ghcr.io/rsahin34/webserver:v2
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: first-service
+  namespace: rsahin
+spec:
+  selector:
+    app: first-deployment
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: first-ingress
+  namespace: rsahin
+spec:
+  rules:
+    - host: rsahin-dart.fria.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: first-service
+                port:
+                  number: 8081
