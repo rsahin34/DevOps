@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      with: 
+        image: rsahin34/webserver:v2
+        registry: ghcr.io
+        tags: v3
+        username: ${{secrets.REPOSITORY_OWNER}}
+        password: ${{secrets.WORKFLOW_TOKEN}}
