@@ -14,11 +14,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+    - name: Login to the container registery
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with: 
-        image: rsahin34/webserver:v2
         registry: ghcr.io
-        tags: v3
-        username: ${{secrets.REPOSITORY_OWNER}}
-        password: ${{secrets.WORKFLOW_TOKEN}}
+        username: ${{github.actor}}
+        password: ${{secrets.GITHUB_TOKEN}}
+        
+    - name: Build and Push docker Image
+      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      with:
+       image: rsahin34/webserver:v2
+       tags: v3
+       
