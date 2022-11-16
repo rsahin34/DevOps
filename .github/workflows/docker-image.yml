@@ -24,6 +24,7 @@ jobs:
     - name: Build and Push docker Image
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
       with:
-       image: rsahin34/webserver:v2
+       context: .
+       push: true
        tags: v3
        
