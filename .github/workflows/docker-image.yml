@@ -29,4 +29,19 @@ jobs:
           ghcr.io/rsahin34/nginxserver:v1
        cache-from: type=gha
        cache-to: type=gha,mode=max
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Kubernetes Set Context
+       uses: Azure/k8s-set-context@v3.0
+       with:
+        kubeconfig: ${{secrets.KUBERNETES_SECRET}}
        
+     - name: Deploy to the Kubernetes cluster
+       uses: Azure/k8s-deploy@v4
+       with:
+          namespace: rsahin
+          manifests: 
+            first_deployment.yml
+          images: |
+            ghcr.io/rsahin34/webserver:v3
