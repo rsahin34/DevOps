@@ -30,7 +30,7 @@ jobs:
        context: .
        push: true
        tags: |
-          ghcr.io/rsahin34/nginxserver:v1
+          ghcr.io/rsahin34/webserver:v4
        cache-from: type=gha
        cache-to: type=gha,mode=max
   deploy:
@@ -48,4 +48,4 @@ jobs:
           manifests: 
             first_deployment.yml
           images: |
-            ghcr.io/rsahin34/webserver:v3
+            ghcr.io/rsahin34/webserver:v4
