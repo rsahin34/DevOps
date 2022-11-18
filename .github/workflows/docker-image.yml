@@ -43,5 +43,6 @@ jobs:
        uses: Azure/k8s-deploy@v4
        with:
           namespace: rsahin
+          manifests: first_deployment.yml 
           images: |
             ghcr.io/rsahin34/webserver:v4
