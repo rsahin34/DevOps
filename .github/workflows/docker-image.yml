@@ -44,6 +44,6 @@ jobs:
        with:
           namespace: rsahin
           manifests: 
-            first_deployment.yml
+            https://github.com/rsahin34/DevOps/blob/main/first_deployment.yml
           images: |
             ghcr.io/rsahin34/webserver:v4
