@@ -1,9 +1,9 @@
 name: Docker Image CI
 
-on:
-  push:
+on:  
+ push:
     branches: [ "main" ]
-  pull_request:
+ pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -30,5 +30,19 @@ jobs:
        context: .
        push: true
        tags: |
-          ghcr.io/rsahin34/webserver:latest
+          ghcr.io/rsahin34/webserver:v4
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Kubernetes Set Context
+       uses: Azure/k8s-set-context@v3.0
+       with:
+        kubeconfig: ${{secrets.KUBERNETES_SECRET}}
        
+     - name: Deploy to the Kubernetes cluster
+       uses: Azure/k8s-deploy@v4
+       with:
+          namespace: rsahin
+          manifests: https://raw.githubusercontent.com/rsahin34/DevOps/feature-v3/first_deployment.yml
+          images: |
+            ghcr.io/rsahin34/webserver:v4
