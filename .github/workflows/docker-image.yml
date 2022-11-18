@@ -26,5 +26,5 @@ jobs:
        context: .
        push: true
        tags: |
-          ghcr.io/rsahin34/webserver:v3
+          ghcr.io/rsahin34/nginxserver:v1
        
