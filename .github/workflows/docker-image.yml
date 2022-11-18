@@ -1,0 +1,35 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Login to the container registery
+      uses: docker/login-action@v2
+      with: 
+        registry: ghcr.io
+        username: ${{github.actor}}
+        password: ${{secrets.GITHUB_TOKEN}}
+  
+        
+    - name: Build and Push docker Image
+      uses: docker/build-push-action@v2
+      with:
+       context: .
+       push: true
+       tags: |
+          rsahin34/webserver:latest
+          ghcr.io/rsahin34/webserver:latest
+       
