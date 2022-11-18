@@ -30,6 +30,5 @@ jobs:
        context: .
        push: true
        tags: |
-          rsahin34/webserver:latest
           ghcr.io/rsahin34/webserver:latest
        
