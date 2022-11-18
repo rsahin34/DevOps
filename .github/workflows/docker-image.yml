@@ -31,8 +31,6 @@ jobs:
        push: true
        tags: |
           ghcr.io/rsahin34/webserver:v4
-       cache-from: type=gha
-       cache-to: type=gha,mode=max
   deploy:
     runs-on: ubuntu-latest
     steps:
