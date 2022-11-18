@@ -1,6 +1,6 @@
 name: Docker Image CI
 
-on: push
+on: workflow_dispatch
 
 jobs:
 
@@ -27,4 +27,6 @@ jobs:
        push: true
        tags: |
           ghcr.io/rsahin34/nginxserver:v1
+       cache-from: type=gha
+       cache-to: type=gha,mode=max
        
