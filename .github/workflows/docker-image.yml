@@ -23,14 +23,21 @@ jobs:
         username: ${{github.actor}}
         password: ${{secrets.GITHUB_TOKEN}}
   
-        
+    - name: Extract metadata for the Docker image
+      id: meta
+      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+      with:
+        images: ghcr.io/rsahin34/webserver
+
     - name: Build and Push docker Image
       uses: docker/build-push-action@v2
       with:
        context: .
        push: true
-       tags: |
-          ghcr.io/rsahin34/webserver:latest
+       #tags: |
+       #   ghcr.io/rsahin34/webserver:latest
+       tags: ${{ steps.meta.outputs.tags }}
+       
   deploy:
      
     runs-on: ubuntu-latest
@@ -48,5 +55,5 @@ jobs:
        with:
           namespace: rsahin
           manifests: first_deployment.yml
-          images: |
-            ghcr.io/rsahin34/webserver:latest
+          images: ghcr.io/rsahin34/webserver
+          tags: ${{ steps.meta.outputs.tags }}
