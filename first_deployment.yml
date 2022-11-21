@@ -14,9 +14,11 @@ spec:
     spec:
       containers:
       - name: first-deployment
-        image: ghcr.io/rsahin34/webserver:v2
+        image: ghcr.io/rsahin34/webserver:latest
         ports:
         - containerPort: 8080
+      imagePullSecrets:
+        - name: github-container-registry
 ---
 apiVersion: v1
 kind: Service
