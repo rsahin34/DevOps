@@ -61,5 +61,4 @@ jobs:
        with:
           namespace: rsahin
           manifests: first_deployment.yml
-          images: ghcr.io/rsahin34/webserver
-          tags: ${{ steps.meta.outputs.tags }}
+          images: ghcr.io/rsahin34/webserver/${{ steps.meta.outputs.tags }}
