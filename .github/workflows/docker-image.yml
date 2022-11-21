@@ -49,4 +49,5 @@ jobs:
        with:
           namespace: rsahin
           manifests: first_deployment.yml
+          force: true
           images: ghcr.io/rsahin34/webserver/:${{ github.sha }}
