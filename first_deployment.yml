@@ -15,9 +15,9 @@ spec:
       containers:
       - name: first-deployment
         image: ghcr.io/rsahin34/webserver:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
-      imagePullPolicy: Always
       imagePullSecrets:
         - name: github-container-registry
 
