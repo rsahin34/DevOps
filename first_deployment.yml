@@ -32,7 +32,7 @@ spec:
     app: first-deployment
   ports:
     - protocol: TCP
-      port: 8081
+      port: 80
       targetPort: 8080
 ---
 apiVersion: networking.k8s.io/v1
@@ -51,4 +51,4 @@ spec:
               service:
                 name: first-service
                 port:
-                  number: 8081
+                  number: 80
